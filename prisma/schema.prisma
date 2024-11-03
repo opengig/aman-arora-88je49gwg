@@ -1,71 +1,142 @@
 
-        generator client {
-          provider = "prisma-client-js"
-        }
-        
-        datasource db {
-          provider = "postgresql"
-          url      = "postgresql://opengig:Database2024!@opengigmvp.postgres.database.azure.com:5432/hi2aa1a043?schema=public"
-        }
+generator client {
+  provider = "prisma-client-js"
+  
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
       
 model User {
-    id          Int       @id @default(autoincrement())
-    email       String    @unique
-    password    String?
-    username    String
-    name        String?
-    role        String?   @default("user")
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    courses     Course[]  @relation("CourseTutor")
-    enrollments Enrollment[]
+  id                    Int       @id @default(autoincrement())
+  email                 String    @unique
+  password              String?
+  username              String    @unique
+  name                  String?
+  role                  String    @default("user")
+  isVerified            Boolean   @default(false)
+  verificationToken     String?
+  otp                   String?
+  otpExpiry             DateTime?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  semenAnalyses         SemenAnalysis[]
+  habits                Habit[]
+  recommendations       Recommendation[]
+  reminders             Reminder[]
+  bookmarks             Bookmark[]
+  forumPosts            ForumPost[]
+  forumThreads          ForumThread[]
+  notifications         Notification[]
 }
 
-model Course {
-    id          Int        @id @default(autoincrement())
-    tutorId     Int
-    title       String
-    description String?
-    zoomLink    String?
-    price       Float
-    createdAt   DateTime   @default(now())
-    updatedAt   DateTime   @updatedAt
-    tutor       User       @relation("CourseTutor", fields: [tutorId], references: [id])
-    slots       CourseSlot[]
-    enrollments Enrollment[]
+model SemenAnalysis {
+  id                    Int       @id @default(autoincrement())
+  volume                Float
+  motility              Float
+  morphology            Float
+  analysisDate          DateTime  @default(now())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
 }
 
-model CourseSlot {
-    id         Int      @id @default(autoincrement())
-    courseId   Int
-    startTime  DateTime
-    endTime    DateTime
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    course     Course   @relation(fields: [courseId], references: [id])
+model Habit {
+  id                    Int       @id @default(autoincrement())
+  sleepPattern          String?
+  diet                  String?
+  lifestyleChanges      String?
+  logDate               DateTime  @default(now())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
 }
 
-model Enrollment {
-    id            Int      @id @default(autoincrement())
-    studentId     Int
-    courseId      Int
-    enrollmentDate DateTime @default(now())
-    paymentStatus String
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
-    student       User     @relation(fields: [studentId], references: [id])
-    course        Course   @relation(fields: [courseId], references: [id])
-    payment       Payment?
+model Recommendation {
+  id                    Int       @id @default(autoincrement())
+  insight               String
+  recommendationDate    DateTime  @default(now())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
 }
 
-model Payment {
-    id            Int      @id @default(autoincrement())
-    enrollmentId  Int      @unique
-    amount        Float
-    paymentMethod String
-    paymentDate   DateTime @default(now())
-    status        String
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
-    enrollment    Enrollment @relation(fields: [enrollmentId], references: [id])
+model Reminder {
+  id                    Int       @id @default(autoincrement())
+  message               String
+  reminderDate          DateTime
+  frequency             String?
+  type                  String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
+}
+
+model Article {
+  id                    Int       @id @default(autoincrement())
+  title                 String
+  content               String
+  category              String
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  bookmarks             Bookmark[]
+}
+
+model Bookmark {
+  id                    Int       @id @default(autoincrement())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
+
+  articleId             Int
+  article               Article   @relation(fields: [articleId], references: [id])
+}
+
+model ForumPost {
+  id                    Int       @id @default(autoincrement())
+  content               String
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
+
+  threadId              Int
+  thread                ForumThread @relation(fields: [threadId], references: [id])
+}
+
+model ForumThread {
+  id                    Int       @id @default(autoincrement())
+  title                 String
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  posts                 ForumPost[]
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id                    Int       @id @default(autoincrement())
+  message               String
+  notificationDate      DateTime  @default(now())
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                Int
+  user                  User      @relation(fields: [userId], references: [id])
 }

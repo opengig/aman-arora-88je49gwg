@@ -14,7 +14,6 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
   const { data: session } = useSession();
 
   const loginUser = async (e: React.FormEvent) => {
@@ -27,7 +26,7 @@ const LoginPage = () => {
         password,
       });
       if (res?.ok) {
-        router.push(`/dashboard/${session?.user?.role ?? "user"}`);
+        router.push(`/dashboard`);
       } else {
         toast.error(res?.error ?? "An error occurred");
       }
@@ -40,12 +39,12 @@ const LoginPage = () => {
 
   return (
     <div className="flex h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-md rounded-2xl bg-white sm:p-8 space-y-8">
+      <div className="mx-auto w-full max-w-md rounded-2xl bg-tertiary sm:p-8 space-y-8">
         <div className="text-center">
-          <h2 className="sm:text-3xl text-2xl font-bold tracking-tight">
+          <h2 className="sm:text-3xl text-2xl font-bold tracking-tight text-primary">
             Sign in to your account
           </h2>
-          <p className="mt-4 max-sm:text-sm text-muted-foreground">
+          <p className="mt-4 max-sm:text-sm text-secondary">
             Don't have an account?{" "}
             <Link
               href="/register"
@@ -58,7 +57,7 @@ const LoginPage = () => {
         </div>
         <form className="space-y-6" onSubmit={loginUser}>
           <div>
-            <Label htmlFor="email">Email address</Label>
+            <Label htmlFor="email" className="text-primary">Email address</Label>
             <div className="mt-1">
               <Input
                 id="email"
@@ -68,12 +67,12 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full"
+                className="w-full border-primary"
               />
             </div>
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-primary">Password</Label>
             <div className="mt-1">
               <Input
                 id="password"
@@ -83,12 +82,12 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full"
+                className="w-full border-primary"
               />
             </div>
           </div>
           <div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-primary hover:bg-secondary">
               {loading ? (
                 <LoaderCircleIcon className="animate-spin" />
               ) : (
@@ -96,21 +95,6 @@ const LoginPage = () => {
               )}
             </Button>
           </div>
-          <Button
-            disabled={googleLoading}
-            variant="outline"
-            className="w-full"
-            onClick={async () => {
-              setGoogleLoading(true);
-              await signIn("google", {
-                callbackUrl: `/dashboard`,
-              });
-              setGoogleLoading(false);
-            }}
-          >
-            {googleLoading && <Loader2 className="animate-spin mr-2" />} Sign in
-            with Google
-          </Button>
         </form>
       </div>
     </div>

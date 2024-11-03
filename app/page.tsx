@@ -1,215 +1,169 @@
-"use client";
+'use client' ;
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import {
-  Mail,
-  User,
-  BookOpen,
-  VideoIcon,
-  DollarSign,
-  ArrowRight,
-} from "lucide-react";
-import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plus, Check, Users, Info, MessageSquare, Heart, Calendar, BarChart, LineChart } from "lucide-react";
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" style={{ backgroundColor: "#009688" }}>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12">
+        <section className="w-full py-16 md:py-24 lg:py-32" style={{ backgroundColor: "#4CAF50" }}>
+          <div className="container mx-auto px-6">
+            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
-                    Revolutionize Your Learning Experience
-                  </h1>
-                  <p className="max-w-xl md:text-xl">
-                    Our platform brings tutors and students together for an
-                    interactive and immersive educational journey.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <Button className="bg-white text-blue-600 hover:bg-gray-200">
-                    Get Started
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="text-white border-white hover:bg-white hover:text-blue-600"
-                  >
-                    Learn More
-                  </Button>
-                </div>
+                <h1 className="text-4xl font-bold text-white sm:text-5xl lg:text-6xl">Track Your Semen Health Effectively</h1>
+                <p className="max-w-lg text-white md:text-xl">
+                  View key metrics, track trends, and receive personalized health recommendations all in one place.
+                </p>
+                <Button className="bg-white text-primary mt-6 px-6 py-3 rounded-md shadow hover:bg-gray-200">Get Started</Button>
               </div>
-              <Image
+              <img
                 src="https://picsum.photos/seed/picsum/200/300"
-                alt="Learning"
-                width={400}
-                height={600}
-                className="mx-auto w-full rounded-xl lg:order-last"
+                alt="Semen Health"
+                className="mx-auto rounded-xl object-cover shadow-xl lg:order-last"
               />
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Core Features
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Explore the powerful features designed to enhance the
-                educational experience for both tutors and students.
+        <section className="w-full py-16 md:py-24 lg:py-32" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="container mx-auto px-6">
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl font-bold text-primary sm:text-4xl">Your Semen Health Journey</h2>
+              <p className="text-secondary max-w-xl mx-auto">
+                Log your habits, receive insights, and track your progress towards better semen health.
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 py-12">
+            <div className="mt-12 grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               <Card>
                 <CardHeader>
-                  <User className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>User Authentication</CardTitle>
-                  <CardDescription>
-                    Email and Password Login/Signup
-                  </CardDescription>
+                  <BarChart className="h-10 w-10 text-primary" />
+                  <CardTitle className="mt-4 text-center text-xl font-semibold">Track Metrics</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p>
-                    Secure accounts for students and tutors with essential login
-                    and signup capabilities.
-                  </p>
+                <CardContent className="text-center text-secondary">
+                  Keep track of semen health metrics and view trends over time.
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <BookOpen className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Course Management</CardTitle>
-                  <CardDescription>Create and View Courses</CardDescription>
+                  <Calendar className="h-10 w-10 text-primary" />
+                  <CardTitle className="mt-4 text-center text-xl font-semibold">Receive Insights</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p>
-                    Tutors can create and manage their courses with flexible
-                    scheduling and detailed descriptions.
-                  </p>
+                <CardContent className="text-center text-secondary">
+                  Get personalized recommendations and reminders.
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <VideoIcon className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Zoom Link Access</CardTitle>
-                  <CardDescription>Controlled Access</CardDescription>
+                  <Info className="h-10 w-10 text-primary" />
+                  <CardTitle className="mt-4 text-center text-xl font-semibold">Educational Resources</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p>
-                    Secure Zoom access ensures only enrolled students can join
-                    the class sessions.
-                  </p>
+                <CardContent className="text-center text-secondary">
+                  Access a library of articles on semen health.
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader>
-                  <DollarSign className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Payment Processing</CardTitle>
-                  <CardDescription>Secure Transactions</CardDescription>
+                  <Users className="h-10 w-10 text-primary" />
+                  <CardTitle className="mt-4 text-center text-xl font-semibold">Join Discussions</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p>
-                    Integrated payment solutions ensure seamless and secure
-                    transactions for course enrollments.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <User className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Student Dashboard</CardTitle>
-                  <CardDescription>Enrolled Courses Overview</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    A personalized dashboard for students to monitor and access
-                    their enrolled courses easily.
-                  </p>
+                <CardContent className="text-center text-secondary">
+                  Participate in forums and expert-led Q&A sessions.
                 </CardContent>
               </Card>
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Frequently Asked Questions
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Find answers to common questions and learn more about our
-                platform’s capabilities.
+        <section className="w-full py-16 md:py-24 lg:py-32" style={{ backgroundColor: "#009688" }}>
+          <div className="container mx-auto px-6">
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">Community & Support</h2>
+              <p className="text-white max-w-xl mx-auto">
+                Engage with a community that cares about your health and well-being.
               </p>
             </div>
-            <div className="mx-auto max-w-3xl py-12">
-              <Accordion type="single" collapsible>
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    How do I sign up as a tutor?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Tutors can sign up using their email and password and start
-                    creating courses immediately.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                  <AccordionTrigger>
-                    How can students enroll in courses?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Students can browse available courses and enroll by
-                    proceeding to the payment page.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>
-                    What payment methods are supported?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    We support various payment methods to ensure a smooth
-                    enrollment experience for all users.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            </div>
+            <Accordion type="single" collapsible className="mt-12 max-w-3xl mx-auto">
+              <AccordionItem value="item-1">
+                <AccordionTrigger className="text-white">How do I track my habits?</AccordionTrigger>
+                <AccordionContent className="text-white">
+                  Use our app to log daily habits like diet, sleep, and lifestyle changes.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger className="text-white">What insights can I receive?</AccordionTrigger>
+                <AccordionContent className="text-white">
+                  Receive insights based on logged data and personalized recommendations for improvement.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger className="text-white">Can I join discussions anonymously?</AccordionTrigger>
+                <AccordionContent className="text-white">
+                  Yes, you can participate in forums anonymously and engage in discussions without revealing your identity.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Join Us Today
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Begin your journey with our innovative learning management
-                platform. Sign up now and explore endless learning
-                possibilities!
+        <section className="w-full py-16 md:py-24 lg:py-32" style={{ backgroundColor: "#FFFFFF" }}>
+          <div className="container mx-auto px-6">
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl font-bold text-primary sm:text-4xl">Other Features</h2>
+              <p className="text-secondary max-w-xl mx-auto">
+                Explore additional features that enhance your overall experience.
               </p>
-              <Button className="bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 text-lg">
-                Sign Up Now
-              </Button>
+            </div>
+            <div className="mt-12 flex flex-col items-center space-y-8">
+              <div className="flex items-center gap-6">
+                <Avatar>
+                  <AvatarImage src="https://picsum.photos/seed/picsum/100/100" />
+                  <AvatarFallback>AU</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-medium text-secondary">Anonymous User</p>
+                  <p className="text-sm">"The app has transformed my approach to health. It's intuitive and informative."</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-6">
+                <Avatar>
+                  <AvatarImage src="https://picsum.photos/seed/picsum/100/100" />
+                  <AvatarFallback>JH</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="font-medium text-secondary">John Health</p>
+                  <p className="text-sm">"A must-have for anyone serious about improving their semen health."</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </main>
+      <footer className="bg-secondary p-6 w-full">
+        <div className="container mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-white text-sm">
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Features</h3>
+            <a href="#">Metrics</a>
+            <a href="#">Recommendations</a>
+            <a href="#">Articles</a>
+            <a href="#">Forums</a>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Company</h3>
+            <a href="#">About Us</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Support</h3>
+            <a href="#">Help Center</a>
+            <a href="#">Community</a>
+            <a href="#">FAQs</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
