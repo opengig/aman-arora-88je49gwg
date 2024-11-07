@@ -45,6 +45,22 @@ jobs:
 
           echo "INSTANCE_IP: $INSTANCE_IP"
 
+          RESPONSE=$(curl --request POST \
+          --url https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/dns_records \
+          --header "Content-Type: application/json" \
+          --header "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+          --data '{
+            "comment": "Domain verification record",
+            "name": "'"${{ github.event.repository.name }}"'",
+            "proxied": false,
+            "ttl": 86400,
+            "content": "'"${{ env.INSTANCE_IP }}"'",
+            "type": "A"
+          }')
+
+          DNS_NAME=$(echo "$RESPONSE" | jq ".result.name")
+          echo "DNS Name:- $DNS_NAME"
+
           # Deploying Now..!!
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/github ubuntu@${{ env.INSTANCE_IP }} 'bash -s' < ./deploy.sh
           curl -X PATCH "https://tools-backend.dev.opengig.work/deployment/${{ github.event.repository.name }}" \
